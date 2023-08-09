@@ -1,0 +1,27 @@
+<div class="w-4/5 mx-auto">
+  <h1 class="font-bold text-4xl">Forgot your password?</h1>
+    
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "w-full" }) do |f| %>
+
+    <div class="card bg-neutral w-4/5 mx-auto text-neutral-content shadow-xl p-7 my-10">
+      <div class="form-control mt-3 w-full">
+        <div class="label">
+          <%= f.label :email, class: "label-text"%>
+        </div>
+        <%= f.email_field :email, class: "w-full input input-bordered", autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="form-control flex mt-7 w-full p-5">
+        <div class="tooltip" data-tip="Send me reset password instructions">
+          <%= f.submit "Send", class: "btn btn-primary w-full" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="card-actions w-full px-7 py-8 justify-between">
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

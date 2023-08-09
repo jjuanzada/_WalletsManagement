@@ -1,0 +1,93 @@
+<div class="w-4/5 mx-auto">
+  <h1 class="font-bold text-4xl">Edit <%= resource_name.to_s.humanize %></h1>
+
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "my-7" }) do |f| %>
+    <div class="card bg-neutral w-4/5 mx-auto text-neutral-content shadow-xl p-7 my-10">
+      <div class="form-control my-3">
+        <div class="label">
+            <%= f.label :first_name, class: "label-text" %>
+        </div>
+        <%= f.text_field :first_name, class: "input input-bordered w-full", placeholder: "Type here" %>
+      </div>
+
+      <div class="form-control my-3">
+        <div class="label">
+            <%= f.label :last_name, class: "label-text" %>
+        </div>
+        <%= f.text_field :last_name, class: "input input-bordered w-full", placeholder: "Type here" %>
+      </div>
+
+      <div class="form-control my-3">
+        <div class="label">
+            <%= f.label :cpf, class: "label-text" %>
+        </div>
+        <%= f.text_field :cpf, value: format_cpf(resource.cpf), class: "input input-bordered w-full", placeholder: "Type here" %>
+      </div>
+
+      <div class="form-control my-3">
+        <div class="label">
+            <%= f.label :email, class: "label-text" %>
+        </div>
+        <%= f.email_field :email, class: "input input-bordered w-full", placeholder: "Type here" %>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div class="form-control my-3">
+          Currently waiting confirmation for: <%= resource.unconfirmed_email %>
+        </div>
+      <% end %>
+
+      <div class="form-control my-3">
+        <div class="label">
+          <%= f.label :password, class: "label-text" %>
+          <% if @minimum_password_length %>
+            <span class="label-text-alt">(<%= @minimum_password_length %> characters minimum)</span>
+          <% end %>
+        </div>
+        <%= f.password_field :password, autocomplete: "new-password", class: "input input-bordered w-full", placeholder: "Type here" %>
+      </div>
+
+      <div class="form-control my-3">
+        <div class="label">
+            <%= f.label :password_confirmation, class: "label-text" %>
+        </div>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input input-bordered w-full", placeholder: "Type here" %>
+      </div>
+
+      <div class="form-control my-3">
+        <div class="label">
+            <%= f.label :current_password, class: "label-text" %>
+            <span class="label-text-alt">(We need your current password to confirm your changes)</span>
+        </div>
+        <%= f.password_field :current_password, autocomplete: "current-password", class: "input input-bordered w-full", placeholder: "Type here" %>
+      </div>
+
+      <div class="form-control mt-7 w-full p-5">
+        <%= f.submit "Update", class: "btn btn-primary w-full" %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="card w-4/5 bg-neutral mx-auto shadow-xl my-10">    
+    <div class="card-body">
+      <h2 class="card-title">Cancel my account!
+        <div class="badge badge-error gap-2">Warning!</div>
+      </h2>
+      <div class="p-2">
+        <p><%= @current_employee.first_name%>, are you sure that you want to cancel <span class="font-semibold">YOUR</span> account?</p>
+        <p class="font-extralight">*Note that this action will erase all your data forever!</p>
+      </div>
+      <div class="card-actions justify-end">
+        <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "btn btn-outline btn-error" %>
+      </div>
+    </div>  
+  </div>
+
+  <div class="card-actions px-7 py-8 justify-between">
+    <div>
+      <%= link_to '<- Back', :back, class: "btn btn-ghost"%>
+    </div>
+  </div>
+</div>

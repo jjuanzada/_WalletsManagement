@@ -1,0 +1,64 @@
+<div class="block w-4/5 mx-auto">
+
+  <h1 class="font-bold text-4xl"><span class="font-medium">Welcome back </span><%= @current_employee.first_name %> <%= @last_name %>!</h1>
+  
+  <div class="mx-auto w-4/5 my-10">
+    <div class="flex items-start">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 stroke-primary" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+      <h2 class="font-semibold text-xl mb-3">Employee Status: </h2>
+    </div>
+    <div class="card w-full bg-neutral text-neutral-content shadow-xl">
+      
+      <div class="stats rounded-b-none bg-base-200 shadow">      
+        <div class="stat">
+          <div class="stat-figure text-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-accent"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+          </div>
+          <div class="stat-title">Total Balance</div>
+          <div class="stat-value tooltip" data-tip="All accounts balance">R$<%= @total_balance %></div>
+          <div class="stat-desc tooltip" data-tip="All deposited & withdrawal amount">Deposits: R$<%= @total_credit_amount %><span class="text-success">↗︎</span> - Withdrawal: R$<%= @total_debit_amount %><span class="text-error">↘︎</span></div>
+        </div>
+      
+      </div>
+      <div class="stats rounded-t-none rounded-b-none bg-base-200 shadow">
+        <div class="stat">
+          <div class="stat-figure text-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-7 h-7 fill-secondary" viewBox="0 0 448 512"><path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z"/></svg>
+          </div>
+          <%=link_to users_path do%>
+            <div class="stat-title">Users</div>
+            <div class="stat-value"><%= @users.count %></div>
+            <div class="stat-desc">See all →</div>
+          <% end %>
+        </div>
+        
+        <div class="stat">
+          <div class="stat-figure text-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-info"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <%= link_to all_transactions_path do%>
+            <div class="stat-title">Transactions</div>
+            <div class="stat-value"><%= @transactions.count %></div>
+            <div class="stat-desc">Your transactions: <%= @employee.transactions.count %></div>
+          <% end %>
+        </div>
+      
+      </div>
+      <div class="card-body px-7 py-8">
+        <div class="flex justify-between">
+          <h2 class="card-title">
+            <div class="badge">
+              <%= @employee.id%>
+            </div>
+              <%= @first_name%> <%= @last_name%>
+          </h2>
+        </div>
+        <p class="font-normal"><span class="font-medium">CPF: </span><%= @cpf%></p>
+        <p class="font-normal"><span class="font-medium">E-mail: </span><%= @email%></p>
+        <div class="card-actions justify-end">
+          <div class="badge badge-outline">Created at: <%= @employee.created_at.strftime('%d/%m/%Y')%></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

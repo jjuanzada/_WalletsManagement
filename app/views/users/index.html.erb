@@ -1,0 +1,42 @@
+<div class="w-4/5 mx-auto">
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Users</h1>
+    <%= link_to 'New user', new_user_path, class: "btn btn-primary" %>
+  </div>
+
+  <div id="users" class="overflow-x-auto my-10">
+  <table class="table table-zebra w-full">
+    <thead>
+      <tr>
+        <th>
+        </th>
+        <th>Name</th>
+        <th>CPF</th>
+        <th>Phone</th>
+        <th>E-mail</th>        
+        <th>Balance</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+<%= render @users %>
+ </tbody>
+    <tfoot>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>CPF</th>
+        <th>Phone</th>
+        <th>E-mail</th>
+        <th>Balance</th>
+        <th></th>
+      </tr>
+    </tfoot>
+    
+  </table>
+  <div class="card-actions px-7 py-8 justify-between">
+    <div>
+        <%= link_to '<- Home', root_path, class: "btn btn-ghost"%>
+    </div>
+  </div>
+</div>

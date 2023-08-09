@@ -1,0 +1,108 @@
+<div class="w-4/5 mx-auto">
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Transactions</h1>
+    <div class="btn btn-outlined btn-primary">
+      <%= link_to 'Filter', 'javascript:void(0);', onclick: "openFiltersModal()" %>
+    </div>
+  </div>
+
+  <div id="filters-modal" class="fixed inset-0 z-50 hidden overflow-auto bg-black bg-opacity-50">
+    <div class="card bg-neutral text-neutral-content shadow-xl p-7 my-5 mx-auto w-fit">
+    <%= form_with(url: api_v1_all_transactions_path, method: :get) do |form| %>
+      <div class="card-actions justify-end">
+        <button class="btn btn-square btn-sm" onclick="closeFiltersModal()">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+      <div class="card-body pt-0 mx-auto w-fit">
+        <div class="flex justify-between items-center space-x-4">
+          <div class="form-control my-3">
+            <%= form.label :transaction_date_start, "Start Date:" %>
+            <%= form.date_field :transaction_date_start, class: "input input-bordered", value: params.dig(:q, :transaction_date_start) %>
+          </div>
+          <div class="form-control my-3">
+            <%= form.label :transaction_date_end, "End Date:" %>
+            <%= form.date_field :transaction_date_end, class: "input input-bordered", value: params.dig(:q, :transaction_date_end) %>
+          </div>
+          <div class="form-control my-3">
+            <%= form.label :transaction_type_eq, "Type:" %>
+            <%= form.select :transaction_type_eq, ['credit', 'debit'], { include_blank: true }, class: "input input-bordered" %>
+          </div>
+        </div>
+        <div class="flex justify-between items-center space-x-4">
+          <div class="form-control my-3">
+            <%= form.label :cpf, "CPF:" %>
+            <%= form.text_field :cpf, class: "input input-bordered", placeholder: "###.###.###-##", value: params.dig(:q, :cpf) %>
+          </div>
+          <div class="form-control my-3">
+            <%= form.label :employee, "Employee:" %>
+            <%= form.text_field :employee, class: "input input-bordered", placeholder: "employee@email.com", value: params.dig(:q, :cpf) %>
+          </div>
+        </div>
+        <div class="form-control mt-3 w-full px-5">
+          <%= form.submit "Filter", class: "btn btn-accent"%>
+        </div>
+      </div>
+    <% end %>
+    </div>
+  </div>
+
+  <div id="users" class="overflow-x-auto my-10">
+    <table class="table table-zebra w-full">
+      <thead>
+        <tr>
+          <th>User CPF</th>
+          <th>Transaction Type</th>
+          <th>Amount</th>
+          <th>New Balance</th>
+          <th>Employee</th>
+          <th>Created At</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @transactions.reverse_each do |transaction| %>
+          <tr class="hover">
+            <td>
+              <div class="tooltip" data-tip="Show user">
+                <%= link_to user_path(transaction.user.id), class: "btn btn-ghost btn-xs" do %>
+                  <%= transaction.user.cpf %>
+                <% end %>
+              </div>
+            </td>
+            <td><%= transaction.transaction_type %></td>
+            <td><%= transaction.amount %></td>
+            <td><%= transaction.new_balance %></td>
+            <td><%= transaction.employee.email %></td>
+            <td><%= transaction.created_at.strftime('%H:%M:%S - %Y/%m/%d') %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      <thead>
+        <tr>
+          <th>User CPF</th>
+          <th>Transaction Type</th>
+          <th>Amount</th>
+          <th>New Balance</th>
+          <th>Employee</th>
+          <th>Created At</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="card-actions px-7 py-8 justify-between">
+    <div>
+        <%= link_to '<- Home', root_path, class: "btn btn-ghost"%>
+    </div>
+  </div>
+</div>
+<script>
+  function openFiltersModal(action) {
+    const modal = document.getElementById("filters-modal");
+    modal.classList.remove("hidden");
+  }
+
+  function closeFiltersModal() {
+    const modal = document.getElementById("filters-modal");
+    modal.classList.add("hidden");
+  }
+</script>

@@ -1,0 +1,109 @@
+<div class="w-4/5 mx-auto flex">
+  <div class="mx-auto w-4/5 my-10">
+    <div class="card w-full bg-neutral text-neutral-content shadow-xl">
+    <div class="stats rounded-b-none bg-primary text-primary-content justify-around">
+      <div class="stat">
+        <div class="stat-title flex justify-between">
+          <div>Current balance</div>
+          <div>
+            <%= link_to 'Extract->', extract_user_path, class: "link text-sm self-center"%>
+          </div>
+        </div>
+        <%= link_to extract_user_path do%>
+        <div class="stat-value">R$<%= @user.current_balance%></div>
+        <% end %>
+        <div class="stat-actions">
+          <div class="btn btn-sm">
+            <%= link_to 'Withdraw', 'javascript:void(0);', onclick: "openNewTransactionModal('debit')" %>
+          </div>
+          <div class="btn btn-sm btn-success">
+            <%= link_to 'Deposit', 'javascript:void(0);', onclick: "openNewTransactionModal('credit')" %>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="card-body px-7 py-8">
+        <div class="flex justify-between">
+          <h2 class="card-title">
+            <div class="badge">
+              <%= @user.id%>
+            </div>
+              <%= @user.first_name%> <%= @user.last_name%>
+          </h2>
+          <div class="card-actions justify-end">
+            <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-primary"%>
+          </div>
+        </div>
+        <p class="font-normal"><span class="font-medium">CPF: </span><%= @user.cpf%></p>
+        <p class="font-normal"><span class="font-medium">E-mail: </span><%= @user.email%></p>
+        <p class="font-normal"><span class="font-medium">Phone: </span><%= @user.phone%></p>
+        <div class="card-actions justify-end">
+          <div class="badge badge-outline">Created at: <%= @user.created_at.strftime('%d/%m/%Y')%></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-actions px-7 py-8 justify-between">
+      <div>
+        <%= link_to '<- Back to users', users_path, class: "btn btn-ghost"%>
+      </div>
+      <div>
+        <%= button_to 'Delete user', user_path(@user), method: :delete, class: "btn btn-error" %>
+      </div>
+    </div>
+</div>
+<div id="new-transaction-modal" class="fixed inset-0 z-50 hidden overflow-auto bg-black bg-opacity-50">
+  <div class="flex items-center justify-center min-h-screen">
+    <div id="new-transaction-modal-content" class="modal-box bg-neutral text-neutral-content">
+    </div>
+  </div>
+</div>
+
+<script>
+  function openNewTransactionModal(action) {
+    const modal = document.getElementById("new-transaction-modal");
+    modal.classList.remove("hidden");
+
+    const modalContent = document.getElementById("new-transaction-modal-content");
+    modalContent.innerHTML = `
+      <div class="card-body items-center text-center">
+        <h3 class="card-title py-4" for="amount">Enter the amount to ${action}:</h3>
+        <input class="input input-bordered w-full max-w-xs" type="number" step="0.01" id="amount">
+        <div class="card-actions justify-end py-4">
+          <button class="btn btn-ghost mr-2" onclick="closeNewTransactionModal()">Cancel</button>
+          <button class="btn btn-primary" onclick="performTransaction('${action}')">Confirm</button>
+        </div>
+      </div>
+    `;
+  }
+
+  function closeNewTransactionModal() {
+    const modal = document.getElementById("new-transaction-modal");
+    modal.classList.add("hidden");
+  }
+
+  function performTransaction(action) {
+    const amount = document.getElementById("amount").value;
+    if (amount !== null && amount !== "" && !isNaN(amount)) {
+      const userId = <%= @user.id %>;
+      const csrfToken = '<%= form_authenticity_token %>';
+      fetch(`/users/${userId}/api/v1/${action}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-Token": csrfToken,
+        },
+        body: JSON.stringify({ amount: parseFloat(amount) }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          alert(data.message);
+          location.reload();
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+
+      closeNewTransactionModal();
+    }
+  }
+</script>

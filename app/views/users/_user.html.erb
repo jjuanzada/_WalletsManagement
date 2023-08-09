@@ -1,0 +1,29 @@
+<tr id="<%= dom_id user %>" class="hover">
+  <td>
+    <label>
+      <%= user.id %>
+    </label>
+  </td>
+  <td>
+    <div class="font-bold">
+      <%= user.first_name %> 
+      <%= user.last_name %>
+    </div>
+  </td>
+  <td><%= user.cpf %></td>
+  <td><%= user.phone %></td>
+  <td><%= user.email %></td>
+  <td>
+    <span class="badge badge-ghost badge-sm"><%= user.current_balance %></span>
+  </td>
+  <th>
+    <% if action_name != "show" %>
+      <div class="tooltip" data-tip="Show user">
+        <%= link_to 'Details', user, class: "btn btn-ghost btn-xs"  %>
+      </div>
+      <div class="tooltip" data-tip="Edit user">
+        <%= link_to 'Edit', edit_user_path(user), class: "btn btn-ghost btn-xs" %>
+      </div>
+    <% end %>
+  </th>
+</tr>

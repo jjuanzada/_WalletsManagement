@@ -1,0 +1,39 @@
+<div class="w-4/5 mx-auto">
+  <h1 class="font-bold text-4xl">Extract</h1>
+  <table class="table table-zebra w-full my-10">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>Balance</th>
+        <th>Employee</th>
+        <th>Transaction Date</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @user.transactions.reverse_each do |transaction| %>
+        <tr>
+            <td><%= transaction.transaction_type %></td>
+            <td><%= number_to_currency(transaction.amount) %></td>
+            <td><%= number_to_currency(transaction.new_balance) %></td>
+            <td><%= transaction.employee.email %></td>
+            <td><%= transaction.created_at.strftime('%H:%M:%S - %Y/%m/%d') %></td>
+        </tr>
+    <% end %>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>Balance</th>
+        <th>Employee</th>
+        <th>Transaction Date</th>
+      </tr>
+    </thead>
+    </tbody>
+    </table>
+    <div class="card-actions px-7 py-8 justify-between">
+        <div>
+            <%= link_to '<- Back to users', user_path, class: "btn btn-ghost"%>
+        </div>
+    </div>
+</div>
