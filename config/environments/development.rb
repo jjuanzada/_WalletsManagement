@@ -68,7 +68,7 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 
-  config.hosts << "https://adorable-sfogliatella-6405df.netlify.app"
+  config.hosts << "https://wallets-management-qyejdakqw-jjuanzada.vercel.app"
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'https://wallets-management-qyejdakqw-jjuanzada.vercel.app' }
 end
