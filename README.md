@@ -28,28 +28,26 @@ To get started with the API, follow these steps:
 
 # API Endpoints
 ## Credit Transaction
-Endpoint: POST /api/v1/users/:user_id/transactions/credit
+Endpoint: `POST /api/v1/users/:user_id/transactions/credit`
 
 Credit an amount to the user's virtual wallet.
 
 ## Debit Transaction
-Endpoint: POST /api/v1/users/:user_id/transactions/debit
+Endpoint: `POST /api/v1/users/:user_id/transactions/debit`
 
 Debit an amount from the user's virtual wallet.
 
 ## Balance
-Endpoint: GET /api/v1/users/:user_id/transactions/balance
+Endpoint: `GET /api/v1/users/:user_id/transactions/balance`
 
 Retrieve the current balance of the user's virtual wallet.
 
 ## User Transactions
-Endpoint: GET /api/v1/users/:user_id/transactions
+Endpoint: `GET /api/v1/users/:user_id/transactions`
 
 Retrieve transactions for a specific user within a specified time period.
 
 ## All Transactions
-Endpoint: GET /api/v1/transactions
+Endpoint: `GET /api/v1/transactions`
 
 Retrieve all transactions across all users in a specified time period.
-
-
