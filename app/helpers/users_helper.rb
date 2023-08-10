@@ -2,10 +2,10 @@ module UsersHelper
     def format_cpf(cpf)
       return '' unless cpf
   
-      # Remove caracteres não numéricos do CPF, caso existam
+      # Remove non-numeric characters from CPF
       cpf = cpf.gsub(/\D/, '')
   
-      # Formata o CPF no padrão xxx.xxx.xxx-xx
+      # Format CPF xxx.xxx.xxx-xx
       cpf = "#{cpf[0..2]}.#{cpf[3..5]}.#{cpf[6..8]}-#{cpf[9..10]}"
     end
   end

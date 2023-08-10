@@ -17,7 +17,7 @@ Rails.application.routes.draw do
         post 'debit', to: 'transactions#debit'
         # Retrieve balance route
         get 'balance', to: 'transactions#balance'
-        # Retrieve transactions history route
+        # Retrieve transactions by date route
         get 'transactions', to: 'transactions#transactions'
       end
     end
@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      # Retrive all transactions history route
       get 'all_transactions', to: 'transactions#all_transactions'
     end
   end
