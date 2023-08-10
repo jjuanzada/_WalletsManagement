@@ -4,7 +4,7 @@ module Api
       before_action :authenticate_employee!
       before_action :set_user, only: %i[credit debit balance transactions]
       
-      # POST /api/v1/users/:user_id/transactions/credit
+      # POST /users/:user_id/api/v1/credit
       # Credit an amount to the user's virtual wallet.
       def credit
         amount = params[:amount].to_f
@@ -22,7 +22,7 @@ module Api
         end
       end
       
-      # POST /api/v1/users/:user_id/transactions/debit
+      # POST /users/:user_id/api/v1/debit
       # Debit an amount from the user's virtual wallet.
       def debit
         amount = params[:amount].to_f
@@ -40,13 +40,13 @@ module Api
         end
       end
       
-      # GET /api/v1/users/:user_id/transactions/balance
+      # GET /users/:user_id/api/v1/balance
       # Retrieve the current balance of the user's virtual wallet.
       def balance
         render json: { balance: @user.current_balance }
       end
 
-      # GET /api/v1/users/:user_id/transactions
+      # GET /users/:user_id/api/v1/transactions
       # Retrieve transactions for a specific user within a specified time period.
       def transactions
         start_date = params[:start_date].to_date
