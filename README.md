@@ -26,28 +26,38 @@ To get started with the API, follow these steps:
     ```bash
     rails s
 
-# API Endpoints
-## Credit Transaction
-Endpoint: `POST /api/v1/users/:user_id/transactions/credit`
+## API Endpoints
+### Credit Transaction
+Endpoint: `POST /users/:user_id/api/v1/credit`
 
 Credit an amount to the user's virtual wallet.
 
-## Debit Transaction
-Endpoint: `POST /api/v1/users/:user_id/transactions/debit`
+### Debit Transaction
+Endpoint: `POST /users/:user_id/api/v1/debit`
 
 Debit an amount from the user's virtual wallet.
 
-## Balance
-Endpoint: `GET /api/v1/users/:user_id/transactions/balance`
+### Balance
+Endpoint: `GET /users/:user_id/api/v1/balance`
 
 Retrieve the current balance of the user's virtual wallet.
 
-## User Transactions
-Endpoint: `GET /api/v1/users/:user_id/transactions`
+### User Transactions
+Endpoint: `GET /users/:user_id/api/v1/transactions`
 
 Retrieve transactions for a specific user within a specified time period.
 
-## All Transactions
+### All Transactions
 Endpoint: `GET /api/v1/transactions`
 
 Retrieve all transactions across all users in a specified time period.
+
+## Authentication
+To access the API endpoints, you need to authenticate as an employee. The API uses Devise for authentication.
+
+## Additional Information
+This application was built using Ruby on Rails and the authentication was made using Devise. Here are some additional details you might find useful:
+
+* Ruby version: 3.2.2
+* Rails version: 7.0.6
+* Devise version: 4.9.2
