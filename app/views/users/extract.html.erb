@@ -17,7 +17,7 @@
             <td><%= number_to_currency(transaction.amount) %></td>
             <td><%= number_to_currency(transaction.new_balance) %></td>
             <td><%= transaction.employee.email %></td>
-            <td><%= transaction.created_at.strftime('%H:%M:%S - %Y/%m/%d') %></td>
+            <td><%= transaction.created_at.strftime('%H:%M:%S - %d/%m/%Y') %></td>
         </tr>
     <% end %>
     <thead>
