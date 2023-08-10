@@ -13,12 +13,12 @@
         <div class="stat-value">R$<%= @user.current_balance%></div>
         <% end %>
         <div class="stat-actions">
-          <div class="btn btn-sm">
-            <%= link_to 'Withdraw', 'javascript:void(0);', onclick: "openNewTransactionModal('debit')" %>
-          </div>
-          <div class="btn btn-sm btn-success">
-            <%= link_to 'Deposit', 'javascript:void(0);', onclick: "openNewTransactionModal('credit')" %>
-          </div>
+          <%= link_to 'javascript:void(0);', onclick: "openNewTransactionModal('debit')" do %>
+            <div class="btn btn-sm">Withdraw</div>
+          <% end %>
+          <%= link_to 'javascript:void(0);', onclick: "openNewTransactionModal('credit')" do %>
+            <div class="btn btn-sm btn-success">Deposit</div>
+          <% end %>
         </div>
       </div>
     </div>
