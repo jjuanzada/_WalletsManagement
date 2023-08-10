@@ -1,24 +1,26 @@
-# README
+# Wallets Management API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Welcome to the Wallets Management documentation. This App allows you to manage users, virtual wallets, perform transactions, and retrieve transaction information for users.
 
-Things you may want to cover:
+## Getting Started
 
-* Ruby version
+To get started with the API, follow these steps:
 
-* System dependencies
+1. Clone this repository to your local machine:
 
-* Configuration
+   ```bash
+   git clone https://github.com/jjuanzada/_WalletsManagement.git
 
-* Database creation
+2. Install the required dependencies:
+    ```bash
+    bundle install
 
-* Database initialization
+3. Set up the database:
+    ```bash
+    rails db:setup
 
-* How to run the test suite
+4. Run rails server in terminal from root directory of project:
+    ```bash
+    rails server
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
-
-* ...
